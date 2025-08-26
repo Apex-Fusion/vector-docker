@@ -8,6 +8,7 @@ services:
   #
   # standalone
   # prerequisite for: dbsync, wallet-api, ogmios
+  # prerequisite for: dbsync, wallet-api, ogmios, dolos
   vector-relay:
     image: ghcr.io/intersectmbo/cardano-node:10.1.4
     environment:
@@ -251,7 +252,38 @@ services:
       wallet-api:
         condition: service_started
 
+  # ======
+  # dolos bootstrap (one time command to initialize dolos)
+  # ======
+  #
+  # requires: vector-relay
+  dolos-bootstrap:
+    image: nicolasluduenatxpipe/vector-dolos:latest
+    command: ["bootstrap", "relay", "-c", "/config/dolos.toml"]
+    volumes:
+      - dolos-data:/data
+      - ./config/dolos:/config
+    depends_on:
+      vector-relay:
+        condition: service_healthy
+    restart: "no"
 
+  # ======
+  # dolos
+  # ======
+  #
+  # requires: dolos-bootstrap to be completed
+  dolos:
+    image: nicolasluduenatxpipe/vector-dolos:latest
+    command: ["daemon", "-c", "/config/dolos.toml"]
+    ports:
+      - 50051:50051
+    volumes:
+      - dolos-data:/data
+      - ./config/dolos:/config
+    depends_on:
+      dolos-bootstrap:
+        condition: service_completed_successfully
 
 secrets:
   # prerequisite for: postgres, dbsync, blockfrost
@@ -274,3 +306,5 @@ volumes:
   db-sync-data:
   # required for - wallet-api
   wallet-api-data:
+  # required for - dolos
+  dolos-data:
