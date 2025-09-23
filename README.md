@@ -117,6 +117,16 @@ Note that if you are also running a vector testnet compose setup on the same mac
 from either vector or vector setup on either wallet-api by targetting the desired one. Default ports for them are
 8190 for vector testnet and 8090 for vector testnet.
 
+## Dolos
+
+Dolos is a Node written in Rust that implemnts an interface for querying and interacting with the blockchain called
+[UTxORPC](https://utxorpc.org/introduction). It's exposed on port `50051`. I recommend you to use `grpcurl`:
+
+```sh
+grpcurl -plaintext localhost:50051 utxorpc.v1alpha.query.QueryService.ReadParams | jq
+```
+
+
 
 ## Remove procedure
 
