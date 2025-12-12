@@ -164,7 +164,7 @@ services:
       - BLOCKFROST_CONFIG_DBSYNC_DATABASE_FILE=/run/secrets/postgres_db
       - BLOCKFROST_CONFIG_DBSYNC_MAX_CONN=10
       - BLOCKFROST_CONFIG_NETWORK=mainnet
-      - BLOCKFROST_CONFIG_TOKEN_REGISTRY_URL=https://tokens.cardano.org
+      - BLOCKFROST_CONFIG_TOKEN_REGISTRY_URL=https://tokens.vector.testnet.apexfusion.org
     depends_on:
       db-sync:
         condition: service_started
