@@ -24,6 +24,7 @@ For detals consult the docker compose file but at the time of writing, the follo
 | blockfrost   |       v1.7.0 | blockfrost/backend-ryo               |
 | wallet-api   |   2023.12.18 | cardanofoundation/cardano-wallet     |
 | icarus       |  v2023-04-14 | piotrstachyra/icarus                 |
+| dolos        |      v0.23.0 | nicolasluduenatxpipe/vector-dolos    |
 
 
 ## Prerequisites:
@@ -110,6 +111,26 @@ http://localhost:4477/network-info
 Note that if you are also running a vector testnet compose setup on the same machine you can connect icarus 
 from either vector or vector setup on either wallet-api by targetting the desired one. Default ports for them are
 8190 for vector testnet and 8090 for vector testnet.
+
+## Dolos
+
+Dolos is a new type of Cardano node, fine-tuned to solve a very narrow scope: keeping an updated copy of the ledger and
+replying to queries from trusted clients, while requiring a small fraction of the resources. It implements [UTxORPC]
+(https://utxorpc.org), which is an interface that allows us as developers to interact with the blockchain in different ways:
+- reacting to new blocks
+- querying UTxOs
+- awaiting new transactions
+- submitting transactions
+- evaluating scripts
+
+This service will be booted on port 50051. You can start querying it using [`grpcurl`](https://github.com/fullstorydev/grpcurl):
+```sh
+grpcurl -plaintext localhost:50051 utxorpc.v1alpha.query.QueryService.ReadParams | jq
+```
+
+Check our [official developer documentation](https://developers.apexfusion.org/documentation/l2-vector) where we go into depth on
+how to use this powerful tool.
+
 
 
 ## Remove procedure
