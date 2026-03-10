@@ -13,7 +13,7 @@ ConwayGenesisFile: genesis/shelley/genesis.conway.json
 ByronGenesisHash: c0629408cdd5e92063e217cb0ec9c3d663203fd4a62fa4569b8d9adb80d82d9b
 ShelleyGenesisHash: e0cee684c016ea3bb360b48878f48c2cc5961939bca0943be9e5162b186c039c
 AlonzoGenesisHash: 501e2702bddac606c398acf9733af26857de5c0424f6e421ea524cf7a0c30f99
-ConwayGenesisHash: 72a8e84c684b44e6b7530b6861582c5fa2db112f5b56e38505f987f34f8ffa66
+ConwayGenesisHash: 08eba59c8a725375761de7d8a690a6a6d3e14c82020b18f6014dacaca7b4445e
 #SocketPath: db/node.socket
 
 ##### Blockfetch Protocol
